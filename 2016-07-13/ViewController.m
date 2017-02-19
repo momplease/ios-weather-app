@@ -13,9 +13,9 @@
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSMutableArray* addedCities;
 @property NSString *selectedCity;
 @property CLLocationCoordinate2D selectedCoords;
-@property (strong, nonatomic) NSMutableArray* addedCities;
 @end
 
 @implementation ViewController
@@ -71,6 +71,9 @@
     //self.cwc.city = nil;
     //self.cwc.worldCoord = coords;
     //[self.navigationController pushViewController:self.cwc animated:YES];
+    self.selectedCoords = coords;
+    //self.selectedCity = nil;
+    [self performSegueWithIdentifier:kSegueToCityWeatherViewController sender:self];
 }
 
     
@@ -81,13 +84,14 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     cell.textLabel.text = [self.addedCities objectAtIndex:indexPath.row];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     self.selectedCity = [self.addedCities objectAtIndex:indexPath.row];
-    [self performSegueWithIdentifier:kSegueToCityWeatherController sender:self];
+    [self performSegueWithIdentifier:kSegueToCityWeatherViewController sender:self];
 }
 
 
@@ -103,11 +107,12 @@
 
 #pragma mark - Segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:kSegueToCityWeatherController]) {
-        CityWeatherController *cwc = (CityWeatherController*)segue.destinationViewController;
+    if ([segue.identifier isEqualToString:kSegueToCityWeatherViewController]) {
+        CityWeatherViewController *cwc = (CityWeatherViewController*)segue.destinationViewController;
         cwc.navigationItem.title = self.selectedCity;
-        cwc.city = self.selectedCity;
-        cwc.worldCoord = CLLocationCoordinate2DMake(-1, -1);
+        cwc.worldCoord = self.selectedCoords;
+        cwc.city = nil;
+        //cwc.worldCoord = CLLocationCoordinate2DMake(-1, -1);
     } else if ([segue.identifier isEqualToString:kSegueToAddingCityController]) {
         CitiesAddingController *cac = (CitiesAddingController*)segue.destinationViewController;
         cac.delegate = self;
@@ -115,6 +120,8 @@
         MapViewController *map = (MapViewController*)segue.destinationViewController;
         map.navigationItem.title = @"World Map";
         map.delegate = self;
+    } else {
+        [super prepareForSegue:segue sender:sender];
     }
 }
 

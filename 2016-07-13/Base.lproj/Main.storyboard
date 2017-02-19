@@ -45,7 +45,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="06c-fi-qlS" id="RNH-xP-lSA">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -78,14 +78,15 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="wiU-9S-KO3" id="Pmi-Kp-xNc"/>
-                        <segue destination="12v-hE-xgW" kind="show" identifier="SegueToCityWeatherController" id="PDZ-RN-XI1"/>
+                        <segue destination="12v-hE-xgW" kind="show" identifier="SegueToCityWeatherViewController" id="PDZ-RN-XI1"/>
                         <segue destination="nfV-1o-wXp" kind="show" identifier="SegueToAddingCityController" id="HwF-Mv-48i"/>
                         <segue destination="bpU-E7-gwU" kind="show" identifier="SegueToMapViewController" id="uwe-Hu-wV6"/>
+                        <segue destination="l6Q-L1-aXP" kind="show" identifier="SegueToWorldLocationWeatherViewController" id="HRu-nA-IWm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hzo-H0-VLO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="990" y="125"/>
+            <point key="canvasLocation" x="929" y="125"/>
         </scene>
         <!--Adding city-->
         <scene sceneID="P1c-Em-YDg">
@@ -107,7 +108,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YD6-V5-8OI" id="4sA-jk-6t7">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -130,7 +131,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Ub-gB-sbD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1926" y="125"/>
+            <point key="canvasLocation" x="2148" y="-224"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="pua-iz-pYg">
@@ -145,7 +146,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="yr8-Uf-6x7">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -162,12 +163,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cyS-n2-ZcN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="990" y="-640"/>
+            <point key="canvasLocation" x="2148" y="491"/>
         </scene>
-        <!--City Weather Controller-->
+        <!--City Weather View Controller-->
         <scene sceneID="jKc-z2-V9a">
             <objects>
-                <viewController storyboardIdentifier="CityWeatherController" id="12v-hE-xgW" customClass="CityWeatherController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CityWeatherViewController" id="12v-hE-xgW" customClass="CityWeatherViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="P7z-Rn-8bD"/>
                         <viewControllerLayoutGuide type="bottom" id="bpW-Es-yIL"/>
@@ -201,7 +202,40 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lme-0T-hbo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="990" y="922"/>
+            <point key="canvasLocation" x="521" y="1008"/>
+        </scene>
+        <!--World Location Weather View Controller-->
+        <scene sceneID="HbG-Yp-kyI">
+            <objects>
+                <viewController id="l6Q-L1-aXP" customClass="WorldLocationWeatherViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fTY-H3-do2"/>
+                        <viewControllerLayoutGuide type="bottom" id="SPm-4J-SKP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="KoA-N2-ZW2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1W4-ca-Fka">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="1W4-ca-Fka" secondAttribute="trailing" id="LXb-Rf-JJr"/>
+                            <constraint firstItem="1W4-ca-Fka" firstAttribute="leading" secondItem="KoA-N2-ZW2" secondAttribute="leading" id="NoV-oF-1q2"/>
+                            <constraint firstItem="1W4-ca-Fka" firstAttribute="top" secondItem="KoA-N2-ZW2" secondAttribute="top" id="YxL-Mb-Amf"/>
+                            <constraint firstItem="SPm-4J-SKP" firstAttribute="top" secondItem="1W4-ca-Fka" secondAttribute="bottom" id="a5n-B3-UEd"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="worldLocationWeatherTableView" destination="1W4-ca-Fka" id="ZCq-oR-XP1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="loS-iL-lkK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1365.5999999999999" y="1007.9460269865068"/>
         </scene>
     </scenes>
 </document>

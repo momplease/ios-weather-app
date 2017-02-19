@@ -11,8 +11,9 @@
 
 #import <Foundation/Foundation.h>
 
-NSString *const kSegueToCityWeatherController = @"SegueToCityWeatherController";
+NSString *const kSegueToCityWeatherViewController = @"SegueToCityWeatherViewController";
 NSString *const kSegueToAddingCityController = @"SegueToAddingCityController";
 NSString *const kSegueToMapViewController = @"SegueToMapViewController";
+NSString *const kSegueToWorldLocationWeatherViewController = @"SegueToWorldLocationWeatherViewController";
 
 #endif /* Segues_h */

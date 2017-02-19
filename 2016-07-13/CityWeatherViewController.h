@@ -11,11 +11,11 @@
 #import "AZWeatherInfo.h"
 #import <CoreLocation/CoreLocation.h>
 
-@interface CityWeatherController : UIViewController
+@interface CityWeatherViewController : UIViewController
             <UITableViewDelegate,
             UITableViewDataSource>
 
 @property NSString* city;
-@property CLLocationCoordinate2D worldCoord;
+//@property CLLocationCoordinate2D worldCoord;
 
 @end

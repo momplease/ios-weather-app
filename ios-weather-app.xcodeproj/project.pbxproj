@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		828780F61E22403C005CEDFB /* CityWeatherController.m in Sources */ = {isa = PBXBuildFile; fileRef = 828780F51E22403C005CEDFB /* CityWeatherController.m */; };
+		828780F61E22403C005CEDFB /* CityWeatherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 828780F51E22403C005CEDFB /* CityWeatherViewController.m */; };
 		828780F91E28EEAF005CEDFB /* AZWeatherInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 828780F81E28EEAF005CEDFB /* AZWeatherInfo.m */; };
 		82B551B61E490A2300F12F8B /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B551B51E490A2300F12F8B /* MapViewController.m */; };
 		82B551C71E4A580F00F12F8B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82B551C61E4A580F00F12F8B /* MapKit.framework */; };
@@ -22,8 +22,10 @@
 		82BBABB01DE232FF0097F85E /* DefaultCities.plist in Resources */ = {isa = PBXBuildFile; fileRef = 82BBABAF1DE232FF0097F85E /* DefaultCities.plist */; };
 		82BBABB31DE244050097F85E /* CitiesAddingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82BBABB21DE244050097F85E /* CitiesAddingController.m */; };
 		82BBABB91DE64F800097F85E /* NSArray+ByClassFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 82BBABB81DE64F800097F85E /* NSArray+ByClassFinder.m */; };
+		82BDE4AA1E59EC8A009DBEDD /* WorldLocationWeatherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82BDE4A91E59EC8A009DBEDD /* WorldLocationWeatherViewController.m */; };
 		82E793181E4D0C1D007EC71A /* CityWeatherTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 82E793171E4D0C1D007EC71A /* CityWeatherTableViewCell.m */; };
 		82E7931B1E4E88F4007EC71A /* AZCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 82E7931A1E4E88F4007EC71A /* AZCache.m */; };
+		82E793211E59E308007EC71A /* WeatherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82E793201E59E308007EC71A /* WeatherViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,8 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		828780F41E22403C005CEDFB /* CityWeatherController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityWeatherController.h; sourceTree = "<group>"; };
-		828780F51E22403C005CEDFB /* CityWeatherController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityWeatherController.m; sourceTree = "<group>"; };
+		828780F41E22403C005CEDFB /* CityWeatherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CityWeatherViewController.h; path = "2016-07-13/CityWeatherViewController.h"; sourceTree = "<group>"; };
+		828780F51E22403C005CEDFB /* CityWeatherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CityWeatherViewController.m; path = "2016-07-13/CityWeatherViewController.m"; sourceTree = "<group>"; };
 		828780F71E28EEAF005CEDFB /* AZWeatherInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZWeatherInfo.h; sourceTree = "<group>"; };
 		828780F81E28EEAF005CEDFB /* AZWeatherInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZWeatherInfo.m; sourceTree = "<group>"; };
 		82B551B41E490A2300F12F8B /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
@@ -72,11 +74,15 @@
 		82BBABB21DE244050097F85E /* CitiesAddingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CitiesAddingController.m; sourceTree = "<group>"; };
 		82BBABB71DE64F800097F85E /* NSArray+ByClassFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+ByClassFinder.h"; sourceTree = "<group>"; };
 		82BBABB81DE64F800097F85E /* NSArray+ByClassFinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+ByClassFinder.m"; sourceTree = "<group>"; };
+		82BDE4A81E59EC8A009DBEDD /* WorldLocationWeatherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorldLocationWeatherViewController.h; sourceTree = "<group>"; };
+		82BDE4A91E59EC8A009DBEDD /* WorldLocationWeatherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorldLocationWeatherViewController.m; sourceTree = "<group>"; };
 		82E793161E4D0C1D007EC71A /* CityWeatherTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityWeatherTableViewCell.h; sourceTree = "<group>"; };
 		82E793171E4D0C1D007EC71A /* CityWeatherTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityWeatherTableViewCell.m; sourceTree = "<group>"; };
 		82E793191E4E88F4007EC71A /* AZCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZCache.h; sourceTree = "<group>"; };
 		82E7931A1E4E88F4007EC71A /* AZCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZCache.m; sourceTree = "<group>"; };
 		82E7931E1E5913AD007EC71A /* Segues.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Segues.h; sourceTree = "<group>"; };
+		82E7931F1E59E308007EC71A /* WeatherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WeatherViewController.h; path = "2016-07-13/WeatherViewController.h"; sourceTree = "<group>"; };
+		82E793201E59E308007EC71A /* WeatherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WeatherViewController.m; path = "2016-07-13/WeatherViewController.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,7 +122,6 @@
 		82BBAB701DE230140097F85E = {
 			isa = PBXGroup;
 			children = (
-				82E7931D1E570AF9007EC71A /* Map */,
 				82BBAB7B1DE230140097F85E /* 2016-07-13 */,
 				82BBAB951DE230140097F85E /* 2016-07-13Tests */,
 				82BBABA01DE230140097F85E /* 2016-07-13UITests */,
@@ -138,6 +143,10 @@
 		82BBAB7B1DE230140097F85E /* 2016-07-13 */ = {
 			isa = PBXGroup;
 			children = (
+				82BDE4AC1E59EF11009DBEDD /* AZ */,
+				82BDE4AB1E59EF00009DBEDD /* Cells */,
+				82E7931D1E570AF9007EC71A /* Map */,
+				82BDE4A71E59E9C3009DBEDD /* WeatherControllers */,
 				82BBABAF1DE232FF0097F85E /* DefaultCities.plist */,
 				82BBAB7F1DE230140097F85E /* AppDelegate.h */,
 				82BBAB801DE230140097F85E /* AppDelegate.m */,
@@ -150,14 +159,6 @@
 				82BBAB7C1DE230140097F85E /* Supporting Files */,
 				82BBABB11DE244050097F85E /* CitiesAddingController.h */,
 				82BBABB21DE244050097F85E /* CitiesAddingController.m */,
-				828780F41E22403C005CEDFB /* CityWeatherController.h */,
-				828780F51E22403C005CEDFB /* CityWeatherController.m */,
-				82E793161E4D0C1D007EC71A /* CityWeatherTableViewCell.h */,
-				82E793171E4D0C1D007EC71A /* CityWeatherTableViewCell.m */,
-				828780F71E28EEAF005CEDFB /* AZWeatherInfo.h */,
-				828780F81E28EEAF005CEDFB /* AZWeatherInfo.m */,
-				82E793191E4E88F4007EC71A /* AZCache.h */,
-				82E7931A1E4E88F4007EC71A /* AZCache.m */,
 				82BBABB71DE64F800097F85E /* NSArray+ByClassFinder.h */,
 				82BBABB81DE64F800097F85E /* NSArray+ByClassFinder.m */,
 				82E7931E1E5913AD007EC71A /* Segues.h */,
@@ -191,6 +192,40 @@
 			path = "2016-07-13UITests";
 			sourceTree = "<group>";
 		};
+		82BDE4A71E59E9C3009DBEDD /* WeatherControllers */ = {
+			isa = PBXGroup;
+			children = (
+				82E7931F1E59E308007EC71A /* WeatherViewController.h */,
+				82E793201E59E308007EC71A /* WeatherViewController.m */,
+				828780F41E22403C005CEDFB /* CityWeatherViewController.h */,
+				828780F51E22403C005CEDFB /* CityWeatherViewController.m */,
+				82BDE4A81E59EC8A009DBEDD /* WorldLocationWeatherViewController.h */,
+				82BDE4A91E59EC8A009DBEDD /* WorldLocationWeatherViewController.m */,
+			);
+			name = WeatherControllers;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		82BDE4AB1E59EF00009DBEDD /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				82E793161E4D0C1D007EC71A /* CityWeatherTableViewCell.h */,
+				82E793171E4D0C1D007EC71A /* CityWeatherTableViewCell.m */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		82BDE4AC1E59EF11009DBEDD /* AZ */ = {
+			isa = PBXGroup;
+			children = (
+				828780F71E28EEAF005CEDFB /* AZWeatherInfo.h */,
+				828780F81E28EEAF005CEDFB /* AZWeatherInfo.m */,
+				82E793191E4E88F4007EC71A /* AZCache.h */,
+				82E7931A1E4E88F4007EC71A /* AZCache.m */,
+			);
+			name = AZ;
+			sourceTree = "<group>";
+		};
 		82E7931D1E570AF9007EC71A /* Map */ = {
 			isa = PBXGroup;
 			children = (
@@ -198,7 +233,6 @@
 				82B551B51E490A2300F12F8B /* MapViewController.m */,
 			);
 			name = Map;
-			path = "2016-07-13";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -340,9 +374,11 @@
 				82E793181E4D0C1D007EC71A /* CityWeatherTableViewCell.m in Sources */,
 				82BBAB811DE230140097F85E /* AppDelegate.m in Sources */,
 				82BBABB91DE64F800097F85E /* NSArray+ByClassFinder.m in Sources */,
+				82E793211E59E308007EC71A /* WeatherViewController.m in Sources */,
 				82B551B61E490A2300F12F8B /* MapViewController.m in Sources */,
 				82E7931B1E4E88F4007EC71A /* AZCache.m in Sources */,
-				828780F61E22403C005CEDFB /* CityWeatherController.m in Sources */,
+				82BDE4AA1E59EC8A009DBEDD /* WorldLocationWeatherViewController.m in Sources */,
+				828780F61E22403C005CEDFB /* CityWeatherViewController.m in Sources */,
 				82BBAB7E1DE230140097F85E /* main.m in Sources */,
 				828780F91E28EEAF005CEDFB /* AZWeatherInfo.m in Sources */,
 				82BBABB31DE244050097F85E /* CitiesAddingController.m in Sources */,

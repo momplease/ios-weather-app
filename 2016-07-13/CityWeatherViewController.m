@@ -6,26 +6,22 @@
 //  Copyright © 2017 Andrii Zaitsev. All rights reserved.
 //
 
-#import "CityWeatherController.h"
+#import "CityWeatherViewController.h"
 #import "CityWeatherTableViewCell.h"
 #import "AZCache.h"
+#import "WeatherViewController.h"
 
-typedef void(^NSURLSessionDataTaskCompletionHandler)(NSData *data, NSURLResponse *response, NSError *error);
-
-@interface CityWeatherController()
+@interface CityWeatherViewController()
 @property (weak, nonatomic) IBOutlet UITableView *cityInfoTableView;
-    @property AZWeatherInfo* cityWeatherInfo;
-
-    @property UIImage *weatherImage;
-    @property NSURL *hourlyImageUrl;
-
+@property AZWeatherInfo* cityWeatherInfo;
+@property NSURL *hourlyImageUrl;
 @end
 
 @implementation CityWeatherController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //TODO: custom UITableViewClass
+
     [self.cityInfoTableView registerClass:[CityWeatherTableViewCell class]
                    forCellReuseIdentifier:[CityWeatherTableViewCell identifier]];
     
@@ -33,41 +29,31 @@ typedef void(^NSURLSessionDataTaskCompletionHandler)(NSData *data, NSURLResponse
     
     // Do any additional setup after loading the view.
     
-    if (self.city != nil) {
+    //if (self.city != nil) {
     
-        [[[NSURLSession sharedSession]
-          dataTaskWithRequest: [self createRequestForCity:[NSString stringWithString:self.city]]
-            completionHandler: self.setWeatherInfoOnResponse] resume];
+    [[[NSURLSession sharedSession]
+      dataTaskWithRequest: [self createRequestForCity:[NSString stringWithString:self.city]]
+        completionHandler: self.createHandlerSettingWeatherInfoOnResponse] resume];
         
-    } else if (self.worldCoord.latitude != -1 && self.worldCoord.latitude != -1) {
+    //} else if (self.worldCoord.latitude != -1 && self.worldCoord.latitude != -1) {
         
-        [[[NSURLSession sharedSession]
-          dataTaskWithRequest: [self createRequestForWorldLocation:self.worldCoord]
-          completionHandler: self.setWeatherInfoOnResponse] resume];
+    //    [[[NSURLSession sharedSession]
+    //      dataTaskWithRequest: [self createRequestForWorldLocation:self.worldCoord]
+    //      completionHandler: self.setWeatherInfoOnResponse] resume];
         
-    }
+    //}
     
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
     [[NSURLSession sharedSession] invalidateAndCancel];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    //[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"Cities"]) {
-        
-    }
-}
-
-#pragma mark - Creating requests
 
 - (NSURLRequest*)createRequestForCity:(NSString*)cityName {
     NSMutableString *requestString = [NSMutableString stringWithString:@"https://api.worldweatheronline.com/premium/v1/weather.ashx?"];
@@ -85,7 +71,7 @@ typedef void(^NSURLSessionDataTaskCompletionHandler)(NSData *data, NSURLResponse
     return request;
 }
 
-- (NSURLRequest*)createRequestForWorldLocation:(CLLocationCoordinate2D)worldCoords {
+/*- (NSURLRequest*)createRequestForWorldLocation:(CLLocationCoordinate2D)worldCoords {
     NSMutableString *requestString = [NSMutableString stringWithString:@"https://api.worldweatheronline.com/premium/v1/weather.ashx?"];
     [requestString appendString:@"key=ac954610b0da4fa7bb615919172101&"];
     
@@ -97,11 +83,11 @@ typedef void(^NSURLSessionDataTaskCompletionHandler)(NSData *data, NSURLResponse
     [request setHTTPMethod:@"GET"];
     
     return request;
-}
+}*/
 
 #pragma mark - Block wrappers
 
-- (NSURLSessionDataTaskCompletionHandler)setWeatherInfoOnResponse {
+- (NSURLSessionDataTaskCompletionHandler)createHandlerSettingWeatherInfoOnResponse {
     __weak typeof(self) weakSelf = self;
     NSURLSessionDataTaskCompletionHandler completion = ^(NSData *data, NSURLResponse *response, NSError *error) {
         

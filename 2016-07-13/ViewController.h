@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CitiesAddingController.h"
-#import "CityWeatherController.h"
+#import "CityWeatherViewController.h"
 #import "MapViewController.h"
 
 @interface ViewController : UIViewController <UITableViewDelegate,

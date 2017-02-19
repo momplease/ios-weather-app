@@ -26,7 +26,8 @@
     
     self.mapView.showsUserLocation = YES;
     
-    UITapGestureRecognizer *gr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onMapPanAction:)];
+    UITapGestureRecognizer *gr = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                         action:@selector(onMapPanAction:)];
     [self.mapView addGestureRecognizer:gr];
     // Do any additional setup after loading the view.
 }
@@ -41,14 +42,9 @@
 }
 
 - (void)onMapPanAction:(UIGestureRecognizer*)gestureRecognizer {
-    
     CGPoint panPoint = [gestureRecognizer locationInView:self.mapView];
-    
     CLLocationCoordinate2D location = [self.mapView convertPoint:panPoint toCoordinateFromView:self.mapView];
-    
     [self.delegate showWeatherInfoForLocationCoords:location];
-    
-    
 }
 
 #pragma mark - MKMapViewDelegate
