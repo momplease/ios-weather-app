@@ -19,8 +19,10 @@
     // Do any additional setup after loading the view.
     
     NSString* path = [[NSBundle mainBundle] pathForResource:@"DefaultCities" ofType:@"plist"];
-    self.cities = [[NSArray alloc] initWithContentsOfFile:path];
-    self.cities = [self.cities filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"not SELF IN %@", self.existingCities]];
+    NSArray *allCities = [[NSArray alloc] initWithContentsOfFile:path];
+    NSArray *existingCities = [self.delegate existingCities];
+    NSPredicate *filter = [NSPredicate predicateWithFormat:@"not SELF IN %@", existingCities];
+    self.cities = [allCities filteredArrayUsingPredicate:filter];
     
 }
 
@@ -47,7 +49,7 @@
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.delegate addCity:[self.cities objectAtIndex:indexPath.row]];
-    [self.presentingViewController popoverPresentationController];
+    [self.navigationController popViewControllerAnimated:YES];
 }
     
 /*

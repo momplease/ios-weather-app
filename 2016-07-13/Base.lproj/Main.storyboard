@@ -45,7 +45,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="06c-fi-qlS" id="RNH-xP-lSA">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -80,6 +80,7 @@
                         <outlet property="tableView" destination="wiU-9S-KO3" id="Pmi-Kp-xNc"/>
                         <segue destination="12v-hE-xgW" kind="show" identifier="SegueToCityWeatherController" id="PDZ-RN-XI1"/>
                         <segue destination="nfV-1o-wXp" kind="show" identifier="SegueToAddingCityController" id="HwF-Mv-48i"/>
+                        <segue destination="bpU-E7-gwU" kind="show" identifier="SegueToMapViewController" id="uwe-Hu-wV6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hzo-H0-VLO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -106,7 +107,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YD6-V5-8OI" id="4sA-jk-6t7">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -161,7 +162,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cyS-n2-ZcN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="990" y="-656"/>
+            <point key="canvasLocation" x="990" y="-640"/>
         </scene>
         <!--City Weather Controller-->
         <scene sceneID="jKc-z2-V9a">

@@ -16,14 +16,5 @@
                                             CitiesAddingControllerDelegate,
                                             MapViewControllerDelegate>
 
-- (void) saveData;
-
-#pragma mark - UITableViewDataSource
-    - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
-    - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
-#pragma mark - CitiesAddingControllerDelegate
-    -(void)addCity:(NSString*)city;
-#pragma mark - MapViewControllerDelegate
-    -(void)showWeatherInfoForCoords:(CGPoint)coords;
 @end
 

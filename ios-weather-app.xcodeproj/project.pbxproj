@@ -76,6 +76,7 @@
 		82E793171E4D0C1D007EC71A /* CityWeatherTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityWeatherTableViewCell.m; sourceTree = "<group>"; };
 		82E793191E4E88F4007EC71A /* AZCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZCache.h; sourceTree = "<group>"; };
 		82E7931A1E4E88F4007EC71A /* AZCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZCache.m; sourceTree = "<group>"; };
+		82E7931E1E5913AD007EC71A /* Segues.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Segues.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +160,7 @@
 				82E7931A1E4E88F4007EC71A /* AZCache.m */,
 				82BBABB71DE64F800097F85E /* NSArray+ByClassFinder.h */,
 				82BBABB81DE64F800097F85E /* NSArray+ByClassFinder.m */,
+				82E7931E1E5913AD007EC71A /* Segues.h */,
 			);
 			path = "2016-07-13";
 			sourceTree = "<group>";

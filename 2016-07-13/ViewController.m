@@ -9,15 +9,13 @@
 #import "ViewController.h"
 #import "NSArray+ByClassFinder.h"
 #import "MapViewController.h"
+#import "Segues.h"
 
 @interface ViewController ()
-    @property NSString *selectedCity;
-    @property CLLocationCoordinate2D selectedCoords;
-
-    @property (weak, nonatomic) IBOutlet UITableView *tableView;
-    @property (strong, nonatomic) CitiesAddingController* cac;
-    //@property (strong, nonatomic) CityWeatherController* cwc;
-    @property (strong, nonatomic) NSMutableArray* addedCities;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property NSString *selectedCity;
+@property CLLocationCoordinate2D selectedCoords;
+@property (strong, nonatomic) NSMutableArray* addedCities;
 @end
 
 @implementation ViewController
@@ -25,17 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.tableFooterView = [[UIView alloc] init];
-    
-    NSFileManager* fileManager = [NSFileManager defaultManager];
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *path = [documentsDirectory stringByAppendingPathComponent:@"AddedCities.plist"];
-    if ([fileManager fileExistsAtPath:path]) {
-        self.addedCities = [NSMutableArray arrayWithContentsOfFile:path];
-    } else {
-        self.addedCities = [[NSMutableArray alloc] init];
-    }
-    
+    self.addedCities = [self loadData];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -46,22 +34,35 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-    
-- (void)addCity:(NSString*)city {
+
+#pragma mark - Load data
+
+-(NSMutableArray * _Nonnull)loadData {
+    NSMutableArray *cities = nil;
+    NSFileManager* fileManager = [NSFileManager defaultManager];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *path = [documentsDirectory stringByAppendingPathComponent:@"AddedCities.plist"];
+    if ([fileManager fileExistsAtPath:path]) {
+        cities = [NSMutableArray arrayWithContentsOfFile:path];
+    } else {
+        cities = [[NSMutableArray alloc] init];
+    }
+    return cities;
+}
+
+#pragma mark - CitiesAddingControllerDelegate
+- (void)addCity:(NSString *)city {
     [self.addedCities addObject:city];
-    [self.tableView setNeedsLayout];
+    [self.tableView reloadData];
+}
+
+-(NSArray *)existingCities {
+    NSArray *existingCities = [NSArray arrayWithArray:self.addedCities];
+    return existingCities;
 }
 
 #pragma mark - MapViewControllerDelegate
-
-- (void)showWeatherInfoForCoords:(CGPoint)coords {
-    //self.cwc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]
-    //            instantiateViewControllerWithIdentifier:@"CityWeatherController"];
-    //self.cwc.navigationItem.title = [NSString stringWithFormat:@"%f %f", coords.x, coords.y];
-    //self.cwc.city = nil;
-    //self.cwc.worldCoord = CLLocationCoordinate2DMake(coords.x, coords.y);
-    //[self.navigationController pushViewController:self.cwc animated:YES];
-}
 
 - (void)showWeatherInfoForLocationCoords:(CLLocationCoordinate2D)coords {
     //self.cwc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]
@@ -85,29 +86,39 @@
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    //self.cwc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]
-    //            instantiateViewControllerWithIdentifier:@"CityWeatherController"];
-    //self.cwc.navigationItem.title = [self.addedCities objectAtIndex:indexPath.row];
-    //self.cwc.city = [self.addedCities objectAtIndex:indexPath.row];
-    //self.cwc.worldCoord = CLLocationCoordinate2DMake(-1, -1);
-    //[self.navigationController pushViewController:self.cwc animated:YES];
-    
     self.selectedCity = [self.addedCities objectAtIndex:indexPath.row];
-    [self performSegueWithIdentifier:@"SegueToCityWeatherController" sender:self];
-    
+    [self performSegueWithIdentifier:kSegueToCityWeatherController sender:self];
 }
 
 
+#pragma mark - IBActions
 - (IBAction)onAddButtonTap:(UIBarButtonItem *)sender {
-    //self.cac = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"Cities"];
-    //self.cac.delegate = self;
-    //self.cac.existingCities = self.addedCities;
-    //UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:self.cac];
-    //[self presentViewController:nc animated:YES completion:nil];
-    [self performSegueWithIdentifier:@"SegueToAddingCityController" sender:self];
+    [self performSegueWithIdentifier:kSegueToAddingCityController sender:self];
 }
 
-    
+
+- (IBAction)onMapButtonTap:(UIBarButtonItem *)sender {
+    [self performSegueWithIdentifier:kSegueToMapViewController sender:self];
+}
+
+#pragma mark - Segue
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:kSegueToCityWeatherController]) {
+        CityWeatherController *cwc = (CityWeatherController*)segue.destinationViewController;
+        cwc.navigationItem.title = self.selectedCity;
+        cwc.city = self.selectedCity;
+        cwc.worldCoord = CLLocationCoordinate2DMake(-1, -1);
+    } else if ([segue.identifier isEqualToString:kSegueToAddingCityController]) {
+        CitiesAddingController *cac = (CitiesAddingController*)segue.destinationViewController;
+        cac.delegate = self;
+    } else if ([segue.identifier isEqualToString:kSegueToMapViewController]) {
+        MapViewController *map = (MapViewController*)segue.destinationViewController;
+        map.navigationItem.title = @"World Map";
+        map.delegate = self;
+    }
+}
+
+#pragma mark - Saving data
 - (void) saveData {
     NSFileManager* fileManager = [NSFileManager defaultManager];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -121,31 +132,6 @@
         [self.addedCities writeToFile:path atomically:YES];
     }
 }
-
-- (IBAction)onMapButtonTap:(UIBarButtonItem *)sender {
-    MapViewController *map = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"Map"];
-    map.navigationItem.title = @"World Map";
-    map.delegate = self;
-    [self.navigationController pushViewController: map
-                                            animated: YES
-                                          ];
-    
-    
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString: @"CityWeatherController"]) {
-        CityWeatherController *cwc = (CityWeatherController*)segue.destinationViewController;
-        cwc.navigationItem.title = self.selectedCity;
-        cwc.city = self.selectedCity;
-        cwc.worldCoord = CLLocationCoordinate2DMake(-1, -1);
-    } else if ([segue.identifier isEqualToString:@"CitiesAddingController"]) {
-        CitiesAddingController *cac = (CitiesAddingController*)segue.destinationViewController;
-        cac.delegate = self;
-        cac.existingCities = self.addedCities;
-    }
-}
-
 
     
 @end

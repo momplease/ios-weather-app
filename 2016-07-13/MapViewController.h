@@ -10,8 +10,7 @@
 #import <MapKit/MapKit.h>
 
 @protocol MapViewControllerDelegate <NSObject>
-@optional
-- (void)showWeatherInfoForCoords:(CGPoint)coords;
+@required
 - (void)showWeatherInfoForLocationCoords:(CLLocationCoordinate2D)coords;
 @end
 

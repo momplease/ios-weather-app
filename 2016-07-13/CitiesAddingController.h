@@ -11,12 +11,12 @@
 @protocol CitiesAddingControllerDelegate <NSObject>
     @required
     -(void)addCity:(NSString*) city;
+    -(NSArray*)existingCities;
 @end
 
 
 @interface CitiesAddingController : UIViewController <UITableViewDelegate, UITableViewDataSource>
     @property (nonatomic) id<CitiesAddingControllerDelegate> delegate;
-    @property (strong, nonatomic) NSArray* existingCities;
 #pragma mark - UITableViewDataSource
     - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
     - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
