@@ -7,7 +7,7 @@
 //
 
 #import "MapViewController.h"
-#import "CityWeatherController.h"
+#import "CityWeatherViewController.h"
 
 @interface MapViewController ()
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;

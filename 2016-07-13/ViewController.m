@@ -8,7 +8,6 @@
 
 #import "ViewController.h"
 #import "NSArray+ByClassFinder.h"
-#import "MapViewController.h"
 #import "Segues.h"
 
 @interface ViewController ()
@@ -51,6 +50,7 @@
     return cities;
 }
 
+
 #pragma mark - CitiesAddingControllerDelegate
 - (void)addCity:(NSString *)city {
     [self.addedCities addObject:city];
@@ -65,17 +65,22 @@
 #pragma mark - MapViewControllerDelegate
 
 - (void)showWeatherInfoForLocationCoords:(CLLocationCoordinate2D)coords {
-    //self.cwc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]
-    //            instantiateViewControllerWithIdentifier:@"CityWeatherController"];
-    //self.cwc.navigationItem.title = [NSString stringWithFormat:@"%f %f", coords.latitude, coords.longitude];
-    //self.cwc.city = nil;
-    //self.cwc.worldCoord = coords;
-    //[self.navigationController pushViewController:self.cwc animated:YES];
     self.selectedCoords = coords;
-    //self.selectedCity = nil;
-    [self performSegueWithIdentifier:kSegueToCityWeatherViewController sender:self];
+    [self performSegueWithIdentifier:kSegueToWorldLocationWeatherViewController sender:self];
 }
 
+
+#pragma mark - WorldLocationWeatherViewControllerDelegate
+
+-(CLLocationCoordinate2D)worldLocation {
+    return self.selectedCoords;
+}
+
+#pragma mark - CityWeatherViewControllerDelegate
+
+-(NSString *)cityName {
+    return self.selectedCity;
+}
     
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -108,18 +113,18 @@
 #pragma mark - Segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:kSegueToCityWeatherViewController]) {
-        CityWeatherViewController *cwc = (CityWeatherViewController*)segue.destinationViewController;
-        cwc.navigationItem.title = self.selectedCity;
-        cwc.worldCoord = self.selectedCoords;
-        cwc.city = nil;
-        //cwc.worldCoord = CLLocationCoordinate2DMake(-1, -1);
+        CityWeatherViewController *cwc = (CityWeatherViewController *)segue.destinationViewController;
+        cwc.delegate = self;
     } else if ([segue.identifier isEqualToString:kSegueToAddingCityController]) {
-        CitiesAddingController *cac = (CitiesAddingController*)segue.destinationViewController;
+        CitiesAddingController *cac = (CitiesAddingController *)segue.destinationViewController;
         cac.delegate = self;
     } else if ([segue.identifier isEqualToString:kSegueToMapViewController]) {
-        MapViewController *map = (MapViewController*)segue.destinationViewController;
+        MapViewController *map = (MapViewController *)segue.destinationViewController;
         map.navigationItem.title = @"World Map";
         map.delegate = self;
+    } else if ([segue.identifier isEqualToString:kSegueToWorldLocationWeatherViewController]) {
+        WorldLocationWeatherViewController *wlwvc = (WorldLocationWeatherViewController *)segue.destinationViewController;
+        wlwvc.delegate = self;
     } else {
         [super prepareForSegue:segue sender:sender];
     }

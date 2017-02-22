@@ -197,7 +197,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="mVP-oN-kKg"/>
                     <connections>
-                        <outlet property="cityInfoTableView" destination="Sl0-mb-aap" id="xlJ-qY-9DB"/>
+                        <outlet property="cityWeatherTableView" destination="Sl0-mb-aap" id="vNN-0F-MSC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lme-0T-hbo" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -207,7 +207,7 @@
         <!--World Location Weather View Controller-->
         <scene sceneID="HbG-Yp-kyI">
             <objects>
-                <viewController id="l6Q-L1-aXP" customClass="WorldLocationWeatherViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WorldLocationWeatherViewController" id="l6Q-L1-aXP" customClass="WorldLocationWeatherViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fTY-H3-do2"/>
                         <viewControllerLayoutGuide type="bottom" id="SPm-4J-SKP"/>
@@ -219,6 +219,10 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1W4-ca-Fka">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="l6Q-L1-aXP" id="lDd-QM-ez1"/>
+                                    <outlet property="delegate" destination="l6Q-L1-aXP" id="KyE-3M-w8e"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

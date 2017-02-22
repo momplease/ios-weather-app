@@ -7,9 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
+#import "WeatherViewController.h"
 
-@interface WorldLocationWeatherViewController : UIViewController
+@protocol WorldLocationWeatherViewControllerDelegate <NSObject>
+@required
+-(CLLocationCoordinate2D)worldLocation;
+@end
+
+@interface WorldLocationWeatherViewController : WeatherViewController
             <UITableViewDelegate,
             UITableViewDataSource>
-
+@property (strong) id<WorldLocationWeatherViewControllerDelegate> delegate;
 @end

@@ -10,11 +10,14 @@
 #import "CitiesAddingController.h"
 #import "CityWeatherViewController.h"
 #import "MapViewController.h"
+#import "WorldLocationWeatherViewController.h"
 
 @interface ViewController : UIViewController <UITableViewDelegate,
                                             UITableViewDataSource,
                                             CitiesAddingControllerDelegate,
-                                            MapViewControllerDelegate>
+                                            MapViewControllerDelegate,
+                                            CityWeatherViewControllerDelegate,
+                                            WorldLocationWeatherViewControllerDelegate>
 
 @end
 

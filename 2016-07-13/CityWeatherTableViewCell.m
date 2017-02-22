@@ -25,4 +25,26 @@
     // Configure the view for the selected state
 }
 
+-(NSString *)reuseIdentifier {
+    return [CityWeatherTableViewCell identifier];
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    CGRect originalTextLabelRect = self.textLabel.frame;
+    CGRect newTextLabelRect;
+    newTextLabelRect.origin = originalTextLabelRect.origin;
+    newTextLabelRect.size = CGSizeMake(originalTextLabelRect.size.width + 30, originalTextLabelRect.size.height);
+    self.textLabel.frame = newTextLabelRect;
+    
+    
+    CGRect originalDetailTextLabelRect = self.detailTextLabel.frame;
+    CGRect newDetailTextLabelRect;
+    newDetailTextLabelRect.size = originalDetailTextLabelRect.size;
+    newDetailTextLabelRect.origin.x = originalDetailTextLabelRect.origin.x + 30;
+    newDetailTextLabelRect.origin.y = originalDetailTextLabelRect.origin.y;
+    self.detailTextLabel.frame = newDetailTextLabelRect;
+}
+
 @end

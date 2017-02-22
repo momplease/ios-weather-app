@@ -7,9 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AZWeatherInfo.h"
+#import <CoreLocation/CLLocation.h>
+
+typedef void(^NSURLSessionDataTaskCompletionHandler)(NSData *data, NSURLResponse *response, NSError *error);
 
 @interface WeatherViewController : UIViewController
-            <UITableViewDelegate,
-            UITableViewDataSource>
 
+@property (strong) AZWeatherInfo *weatherInfo;
+@property NSURL *hourlyImageUrl;
+-(void)setWeatherInfoWithResponseData:(NSData *)data;
+-(void)setImageAsync:(UIImage *)image toCellAccessoryView:(UITableViewCell *)cell;
+- (NSURLSessionDataTaskCompletionHandler)createHandlerSettingWeatherInfoReloadingTableView:(UITableView *)tableView;
+- (NSURLSessionDataTaskCompletionHandler)createHandlerUpdatingWeatherImageInCell:(UITableViewCell*)cell;
+- (NSURLRequest*)createRequestForWorldLocation:(CLLocationCoordinate2D)_;
+- (NSURLRequest*)createRequestForCity:(NSString*)_;
 @end

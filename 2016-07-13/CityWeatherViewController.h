@@ -10,12 +10,17 @@
 #import <UIKit/UIKit.h>
 #import "AZWeatherInfo.h"
 #import <CoreLocation/CoreLocation.h>
+#import "WeatherViewController.h"
 
-@interface CityWeatherViewController : UIViewController
+@protocol CityWeatherViewControllerDelegate <NSObject>
+@required
+-(NSString *)cityName;
+@end
+
+@interface CityWeatherViewController : WeatherViewController
             <UITableViewDelegate,
             UITableViewDataSource>
-
-@property NSString* city;
+@property (nonatomic) id<CityWeatherViewControllerDelegate> delegate;
 //@property CLLocationCoordinate2D worldCoord;
 
 @end
