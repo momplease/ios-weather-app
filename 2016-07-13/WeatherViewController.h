@@ -10,6 +10,7 @@
 #import "AZWeatherInfo.h"
 #import <CoreLocation/CLLocation.h>
 
+extern NSInteger const kWeatherDescCellHeight;
 typedef void(^NSURLSessionDataTaskCompletionHandler)(NSData *data, NSURLResponse *response, NSError *error);
 
 @interface WeatherViewController : UIViewController

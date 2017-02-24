@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "AZWeatherDesc.h"
 
 @interface AZWeatherInfo : NSObject
 
     @property NSString* date;
-    @property NSString* weatherDesc;
-    @property UIImage* weatherDescImage;
+    @property AZWeatherDesc* weatherDesc;
     @property NSNumber* maxtempByC;
     @property NSNumber* mintempByC;
     @property NSString* sunset;
@@ -21,8 +21,7 @@
     @property NSNumber* windspeedKmph;
 
 - (instancetype)initWithDate:(NSString*)date
-                 weatherDesc:(NSString*)weatherDesc
-            weatherDescImage:(UIImage*)image
+                 weatherDesc:(AZWeatherDesc*)weatherDesc
                   maxtempByC:(NSNumber*)maxTemp
                   mintempByC:(NSNumber*)minTemp
                      sunrise:(NSString*)sunrise

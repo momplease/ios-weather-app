@@ -10,8 +10,6 @@
 #import "CityWeatherTableViewCell.h"
 #import "AZCache.h"
 
-const NSInteger kWeatherDescCellHeight = 150;
-
 @interface CityWeatherViewController()
 @property (weak, nonatomic) IBOutlet UITableView *cityWeatherTableView;
 @end
@@ -53,13 +51,13 @@ const NSInteger kWeatherDescCellHeight = 150;
 
 #pragma mark - UITableViewDataSource/Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [super.weatherInfo count] - 1; //temporary
+    return [super.weatherInfo count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    CityWeatherTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: [CityWeatherTableViewCell identifier]];
+    CityWeatherTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[CityWeatherTableViewCell identifier]];
     
     if (cell == nil) {
         cell = [[CityWeatherTableViewCell alloc] initWithStyle:UITableViewCellStyleValue2
@@ -70,19 +68,18 @@ const NSInteger kWeatherDescCellHeight = 150;
         
         NSDictionary *weatherInfo = [super.weatherInfo weatherInfoAsDictionary];
         NSArray *keys = [weatherInfo allKeys];
-    
+        
+        
         cell.textLabel.text = keys[indexPath.row];
         
-        id textValue = [weatherInfo objectForKey:keys[indexPath.row]];
         
-        if ([textValue isKindOfClass:[NSNumber class]]) {
-            cell.detailTextLabel.text = [(NSNumber*)textValue stringValue];
-        } else {
-            cell.detailTextLabel.text = textValue;
-        }
+        id object = [weatherInfo objectForKey:keys[indexPath.row]];
         
-        NSInteger indexOfWeatherDesc = [keys indexOfObject:@"weatherDesc"];
-        if (indexOfWeatherDesc == indexPath.row) {
+        if ([object isKindOfClass:[NSNumber class]]) {
+            cell.detailTextLabel.text = [(NSNumber *)object stringValue];
+        } else if ([object isKindOfClass:[AZWeatherDesc class]]) {
+            
+            cell.detailTextLabel.text = ((AZWeatherDesc *)object).weatherDescription;
             
             UIActivityIndicatorView *indicator;
             indicator = [[UIActivityIndicatorView alloc]
@@ -93,14 +90,22 @@ const NSInteger kWeatherDescCellHeight = 150;
             
             __weak typeof(self) weakSelf = self;
             //if ([[AZCache<UIImage *> sharedCache] objectForKey:weakSelf.city] == nil) {
-                //kostyl to imitate async download
+            //kostyl to imitate async download
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [[[NSURLSession sharedSession] dataTaskWithURL: super.hourlyImageUrl
-                                             completionHandler: [super createHandlerUpdatingWeatherImageInCell:cell]] resume];
+                [[[NSURLSession sharedSession] dataTaskWithURL:weakSelf.hourlyImageUrl
+                                             completionHandler:[weakSelf createHandlerUpdatingWeatherImageInCell:cell]] resume];
             });
-            
-            
+        } else {
+            cell.detailTextLabel.text = object;
         }
+        
+        /*NSInteger indexOfWeatherDesc = [keys indexOfObject:@"weatherDesc"];
+        if (indexOfWeatherDesc == indexPath.row) {
+            
+            
+            
+            
+        }*/
     }
     return cell;
 }

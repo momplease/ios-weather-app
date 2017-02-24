@@ -8,6 +8,8 @@
 
 #import "WeatherViewController.h"
 
+NSInteger const kWeatherDescCellHeight = 150;
+
 @interface WeatherViewController ()
 
 @end
@@ -37,11 +39,12 @@
     self.hourlyImageUrl = [NSURL URLWithString:[[[hourlyInfo objectForKey:@"weatherIconUrl"]
                                                      objectAtIndex:0] objectForKey:@"value"]];
     
+    NSString *strdesc = [[[hourlyInfo objectForKey:@"weatherDesc"] objectAtIndex:0] objectForKey:@"value"];
+    AZWeatherDesc *weatherDescription = [[AZWeatherDesc alloc] initWithDescription:strdesc
+                                                                   andImage:[[UIImage alloc] init]];
+    
     self.weatherInfo = [[AZWeatherInfo alloc] initWithDate:[[weatherInfo objectAtIndex:0] objectForKey:@"date"]
-                                               weatherDesc:[[[hourlyInfo objectForKey:@"weatherDesc"]
-                                                                  objectAtIndex:0]
-                                                                 objectForKey:@"value"]
-                                          weatherDescImage: nil
+                                               weatherDesc:weatherDescription
                                                 maxtempByC:[[weatherInfo objectAtIndex:0]
                                                                  objectForKey:@"maxtempC"]
                                                 mintempByC:[[weatherInfo objectAtIndex:0]
@@ -120,7 +123,7 @@
     NSURLSessionDataTaskCompletionHandler completion = ^(NSData *data, NSURLResponse *response, NSError *error) {
         if (data && ![error code]) {
             UIImage *downloadedWeatherImage = [UIImage imageWithData:data];
-            weakSelf.weatherInfo.weatherDescImage = downloadedWeatherImage;
+            weakSelf.weatherInfo.weatherDesc.image = downloadedWeatherImage;
             [weakSelf setImageAsync:downloadedWeatherImage
              toCellAccessoryView:inCell];
             //if (weakSelf.city != nil) {

@@ -17,8 +17,7 @@
 @implementation AZWeatherInfo
 
 - (instancetype)initWithDate:(NSString*)date
-                 weatherDesc:(NSString*)weatherDesc
-            weatherDescImage:(UIImage*)image
+                 weatherDesc:(AZWeatherDesc*)weatherDesc
                   maxtempByC:(NSNumber*)maxTemp
                   mintempByC:(NSNumber*)minTemp
                      sunrise:(NSString*)sunrise
@@ -29,7 +28,6 @@
     if (self) {
         self.date = date;
         self.weatherDesc = weatherDesc;
-        self.weatherDescImage = image;
         self.maxtempByC = maxTemp;
         self.mintempByC = minTemp;
         self.sunrise = sunrise;

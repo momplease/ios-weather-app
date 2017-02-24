@@ -47,9 +47,7 @@ NSString *const kWoorldLocationCellIdentifier = @"WoorldLocationCellIdentifier";
 
 #pragma mark - UITableViewDataSource/Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    //typeof(super.weatherInfo) s = super.weatherInfo;
-    //NSLog(@"%f", [s.windspeedKmph floatValue]);
-    return [super.weatherInfo count] - 1; //temporary
+    return [super.weatherInfo count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -65,18 +63,17 @@ NSString *const kWoorldLocationCellIdentifier = @"WoorldLocationCellIdentifier";
         NSDictionary *weatherInfo = [super.weatherInfo weatherInfoAsDictionary];
         NSArray *keys = [weatherInfo allKeys];
         
+        
         cell.textLabel.text = keys[indexPath.row];
         
-        id textValue = [weatherInfo objectForKey:keys[indexPath.row]];
         
-        if ([textValue isKindOfClass:[NSNumber class]]) {
-            cell.detailTextLabel.text = [(NSNumber*)textValue stringValue];
-        } else {
-            cell.detailTextLabel.text = textValue;
-        }
+        id object = [weatherInfo objectForKey:keys[indexPath.row]];
         
-        NSInteger indexOfWeatherDesc = [keys indexOfObject:@"weatherDesc"];
-        if (indexOfWeatherDesc == indexPath.row) {
+        if ([object isKindOfClass:[NSNumber class]]) {
+            cell.detailTextLabel.text = [(NSNumber *)object stringValue];
+        } else if ([object isKindOfClass:[AZWeatherDesc class]]) {
+            
+            cell.detailTextLabel.text = ((AZWeatherDesc *)object).weatherDescription;
             
             UIActivityIndicatorView *indicator;
             indicator = [[UIActivityIndicatorView alloc]
@@ -89,18 +86,30 @@ NSString *const kWoorldLocationCellIdentifier = @"WoorldLocationCellIdentifier";
             //if ([[AZCache<UIImage *> sharedCache] objectForKey:weakSelf.city] == nil) {
             //kostyl to imitate async download
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [[[NSURLSession sharedSession] dataTaskWithURL: weakSelf.hourlyImageUrl
-                                             completionHandler: [weakSelf createHandlerUpdatingWeatherImageInCell:cell]] resume];
+                [[[NSURLSession sharedSession] dataTaskWithURL:weakSelf.hourlyImageUrl
+                                             completionHandler:[weakSelf createHandlerUpdatingWeatherImageInCell:cell]] resume];
             });
-            
-            
+        } else {
+            cell.detailTextLabel.text = object;
         }
+        
+        /*NSInteger indexOfWeatherDesc = [keys indexOfObject:@"weatherDesc"];
+         if (indexOfWeatherDesc == indexPath.row) {
+         
+         
+         
+         
+         }*/
     }
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat rowHeight = tableView.rowHeight;
+    NSArray *keys = [[self.weatherInfo weatherInfoAsDictionary] allKeys];
+    if (indexPath.row == [keys indexOfObject:@"weatherDesc"]) {
+        rowHeight = kWeatherDescCellHeight;
+    }
     return rowHeight;
 }
 
