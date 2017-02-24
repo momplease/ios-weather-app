@@ -116,22 +116,15 @@ NSInteger const kWeatherDescCellHeight = 150;
     return completion;
 }
 
-
-- (NSURLSessionDataTaskCompletionHandler)createHandlerUpdatingWeatherImageInCell:(UITableViewCell *)cell {
-    __weak UITableViewCell *inCell = cell;
+- (NSURLSessionDataTaskCompletionHandler)imageDidDownloadWithCompletion:(void(^)(UIImage *image))completionHandler {
     __weak typeof(self) weakSelf = self;
     NSURLSessionDataTaskCompletionHandler completion = ^(NSData *data, NSURLResponse *response, NSError *error) {
         if (data && ![error code]) {
             UIImage *downloadedWeatherImage = [UIImage imageWithData:data];
             weakSelf.weatherInfo.weatherDesc.image = downloadedWeatherImage;
-            [weakSelf setImageAsync:downloadedWeatherImage
-             toCellAccessoryView:inCell];
-            //if (weakSelf.city != nil) {
-            //    [[AZCache<UIImage *> sharedCache] addObject:downloadedWeatherImage
-            //                                         forKey:weakSelf.city];
-            //}
-            
+            completionHandler(downloadedWeatherImage);
         }
+        
     };
     return completion;
 }

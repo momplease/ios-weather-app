@@ -58,49 +58,48 @@ NSString *const kWoorldLocationCellIdentifier = @"WoorldLocationCellIdentifier";
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2
                                                reuseIdentifier:kWoorldLocationCellIdentifier];
     }
-    if (super.weatherInfo != nil) {
+    NSDictionary *weatherInfo = [super.weatherInfo weatherInfoAsDictionary];
+    NSArray *keys = [weatherInfo allKeys];
+    
+    
+    cell.textLabel.text = keys[indexPath.row];
+    
+    
+    id object = [weatherInfo objectForKey:keys[indexPath.row]];
+    
+    if ([object isKindOfClass:[NSNumber class]]) {
+        cell.detailTextLabel.text = [(NSNumber *)object stringValue];
+    } else if ([object isKindOfClass:[AZWeatherDesc class]]) {
         
-        NSDictionary *weatherInfo = [super.weatherInfo weatherInfoAsDictionary];
-        NSArray *keys = [weatherInfo allKeys];
+        cell.detailTextLabel.text = ((AZWeatherDesc *)object).weatherDescription;
         
-        
-        cell.textLabel.text = keys[indexPath.row];
-        
-        
-        id object = [weatherInfo objectForKey:keys[indexPath.row]];
-        
-        if ([object isKindOfClass:[NSNumber class]]) {
-            cell.detailTextLabel.text = [(NSNumber *)object stringValue];
-        } else if ([object isKindOfClass:[AZWeatherDesc class]]) {
-            
-            cell.detailTextLabel.text = ((AZWeatherDesc *)object).weatherDescription;
+        if ([[AZImageCache sharedCache] objectForKey:self.weatherInfo.weatherDesc.weatherDescription] == nil) {
+            __weak typeof(self) weakSelf = self;
             
             UIActivityIndicatorView *indicator;
-            indicator = [[UIActivityIndicatorView alloc]
-                         initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleGray];
+            indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleGray];
             [indicator startAnimating];
             cell.accessoryView = indicator;
             indicator.hidesWhenStopped = YES;
             
-            __weak typeof(self) weakSelf = self;
-            //if ([[AZCache<UIImage *> sharedCache] objectForKey:weakSelf.city] == nil) {
             //kostyl to imitate async download
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [[[NSURLSession sharedSession] dataTaskWithURL:weakSelf.hourlyImageUrl
-                                             completionHandler:[weakSelf createHandlerUpdatingWeatherImageInCell:cell]] resume];
+                                             completionHandler:[weakSelf imageDidDownloadWithCompletion: ^(UIImage *downloadedImage) {
+                    [weakSelf setImageAsync:downloadedImage
+                        toCellAccessoryView:cell];
+                    [[AZImageCache sharedCache] addObject:downloadedImage
+                                                   forKey:weakSelf.weatherInfo.weatherDesc.weatherDescription];
+                }]] resume];
             });
         } else {
-            cell.detailTextLabel.text = object;
+            UIImage *image = [[AZImageCache sharedCache] objectForKey:self.weatherInfo.weatherDesc.weatherDescription];
+            cell.accessoryView = [[UIImageView alloc] initWithImage:image];
         }
-        
-        /*NSInteger indexOfWeatherDesc = [keys indexOfObject:@"weatherDesc"];
-         if (indexOfWeatherDesc == indexPath.row) {
-         
-         
-         
-         
-         }*/
+    } else {
+        cell.detailTextLabel.text = object;
     }
+    
     return cell;
 }
 

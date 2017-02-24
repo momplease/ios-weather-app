@@ -20,7 +20,7 @@ typedef void(^NSURLSessionDataTaskCompletionHandler)(NSData *data, NSURLResponse
 -(void)setWeatherInfoWithResponseData:(NSData *)data;
 -(void)setImageAsync:(UIImage *)image toCellAccessoryView:(UITableViewCell *)cell;
 - (NSURLSessionDataTaskCompletionHandler)createHandlerSettingWeatherInfoReloadingTableView:(UITableView *)tableView;
-- (NSURLSessionDataTaskCompletionHandler)createHandlerUpdatingWeatherImageInCell:(UITableViewCell*)cell;
+- (NSURLSessionDataTaskCompletionHandler)imageDidDownloadWithCompletion:(void(^)(UIImage *image))completionHandler;
 - (NSURLRequest*)createRequestForWorldLocation:(CLLocationCoordinate2D)_;
 - (NSURLRequest*)createRequestForCity:(NSString*)_;
 @end

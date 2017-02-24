@@ -7,8 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 
 @interface AZCache<__covariant ObjectType> : NSObject
+
+typedef AZCache<UIImage *> AZImageCache;
+
 + (AZCache<ObjectType>*)sharedCache;
 
 - (void)addObject:(ObjectType)object forKey:(NSString*)key;
